@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import {
-  LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid,
-} from 'recharts';
+import axios from 'axios';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import Filters from './Filters';
-import Layout from './Layout';
+import MonthlyCalendar from './componets/MonthlyCalendar';
+import MonthlySummary from './componets/MonthlySummary';
 
 interface DataPoint {
   data_conclusao: string;
@@ -53,18 +52,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout>
-      {/* Seu gráfico ficará aqui */}
-      <h1 className="text-xl mb-4">Gráfico de Hora Ouro</h1>
-      <Filters
-        month={month}
-        machine={machine}
-        shift={shift}
-        onFilterChange={handleFilterChange}
-      />
+    <div>
+      <h1>Gráfico de Hora Ouro</h1>
+      <Filters month={month} machine={machine} shift={shift} onFilterChange={handleFilterChange} />
       <LineChart width={1000} height={500} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="data_conclusao" />
+        <XAxis dataKey="data_conclusao"/>
         <YAxis />
         <Tooltip />
         <Legend />
@@ -95,8 +88,11 @@ const App: React.FC = () => {
           strokeDasharray="3 4 5 2"
         />
       </LineChart>
-    </Layout>
+      <MonthlySummary dayData/>
+      <MonthlyCalendar />
+    </div>
   );
 };
 
 export default App;
+

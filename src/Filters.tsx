@@ -16,7 +16,8 @@ const Filters: React.FC<FiltersProps> = ({ month, machine, shift, onFilterChange
     onFilterChange({ month, machine: e.target.value, shift });
   };
 
-  const handleShiftChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Corrigir o tipo de evento para HTMLSelectElement
+  const handleShiftChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onFilterChange({ month, machine, shift: e.target.value });
   };
 
@@ -36,11 +37,15 @@ const Filters: React.FC<FiltersProps> = ({ month, machine, shift, onFilterChange
       </label>
       <label>
         Turno:
-        <input type="text" value={shift} onChange={handleShiftChange} placeholder="Turno" />
+        <select value={shift} onChange={handleShiftChange}>
+          <option value="">Todos</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
       </label>
     </div>
   );
 };
 
 export default Filters;
-
